@@ -26,7 +26,7 @@ public class PriceDAO {
 	// Read by id
 	public Price findById(int id) {
 		
-		if(usingCache == false)
+		if(!usingCache)
 			list();
 		
 		if(cache.containsKey(id))
@@ -99,16 +99,16 @@ public class PriceDAO {
 		Connection conn;
 		PreparedStatement pst;
 		int result = 0;
-		String query = "INSERT INTO price (fulltime,halftime,overtime) VALUES (?,?,?);";
+		String query = "INSERT INTO price (id,fulltime,halftime,overtime) VALUES (?,?,?,?);";
 		String query2 = "SELECT * FROM price ORDER BY id DESC LIMIT 1;";
 		
 		try {
 			conn = DB.getConnection();
 			pst = conn.prepareStatement(query);
-			
-			pst.setBigDecimal(1, price.getFulltime());
-			pst.setBigDecimal(2, price.getHalftime());
-			pst.setBigDecimal(3, price.getOvertime());
+			pst.setInt(1, price.getId());
+			pst.setBigDecimal(2, price.getFulltime());
+			pst.setBigDecimal(3, price.getHalftime());
+			pst.setBigDecimal(4, price.getOvertime());
 			
 			result = pst.executeUpdate();
 			
@@ -139,7 +139,7 @@ public class PriceDAO {
 			showSQLException(e);
 		}
 		
-		return result == 0 ? false : true;
+		return result != 0;
 	}
 	
 	private boolean createControl(Price price) {
