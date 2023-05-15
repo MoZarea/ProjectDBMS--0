@@ -96,13 +96,14 @@ public class PaytypeDAO {
 		Connection conn;
 		PreparedStatement pst;
 		int result = 0;
-		String query = "INSERT INTO paytype (title) VALUES (?);";
+		String query = "INSERT INTO paytype (title,id) VALUES (?,?);";
 		String query2 = "SELECT * FROM paytype ORDER BY id DESC LIMIT 1;";
 		
 		try {
 			conn = DB.getConnection();
 			pst = conn.prepareStatement(query);
 			pst.setString(1, paytype.getTitle());
+			pst.setInt(2,paytype.getId());
 			
 			result = pst.executeUpdate();
 			
@@ -176,7 +177,7 @@ public class PaytypeDAO {
 	private boolean updateControl(Paytype paytype) {
 		for(Entry<Integer, Paytype> obj : cache.entrySet()) {
 			if(obj.getValue().getTitle().equals(paytype.getTitle()) && obj.getValue().getId() != paytype.getId()) {
-				DB.ERROR_MESSAGE = obj.getValue().getTitle() + " kaydı zaten mevcut.";
+				DB.ERROR_MESSAGE = obj.getValue().getTitle() + " duolicate.";
 				return false;
 			}
 		}
