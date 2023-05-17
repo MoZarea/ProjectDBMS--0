@@ -22,6 +22,10 @@ CREATE TABLE price (
   overtime DECIMAL(10, 2) NOT NULL,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO price (fulltime, halftime, overtime) VALUES (10.00, 5.00, 15.00);
+INSERT INTO price (fulltime, halftime, overtime) VALUES (12.50, 6.25, 18.75);
+INSERT INTO price (fulltime, halftime, overtime) VALUES (8.75, 4.38, 13.13);
+
 CREATE TABLE worker (
   id INT AUTO_INCREMENT PRIMARY KEY,
   fname VARCHAR(50) NOT NULL,
