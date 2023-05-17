@@ -29,7 +29,7 @@ public class DB {
 		try {
 			if(conn == null || conn.isClosed()) {
 				try {
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","12345678");//12345678 for zarea db
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","12345");//12345678 for zarea db
 				} catch (SQLException e) {
 					System.err.println(e.getMessage());
 				}
