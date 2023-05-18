@@ -98,6 +98,38 @@ CREATE TABLE work (
   FOREIGN KEY (worktype_id) REFERENCES worktype(id),
   FOREIGN KEY (workgroup_id) REFERENCES workgroup(id)
 );
+-- Query to retrieve all employers from the "employer" table
+SELECT * FROM employer;
+-- Query to insert an employer into the "employer" table
+INSERT INTO employer (id, fname, lname, tel, description, date) VALUES (1, 'John', 'Doe', '1234567890', 'Description', '2023-05-17 10:00:00');
+-- Query to retrieve the latest employer from the "employer" table
+SELECT * FROM employer ORDER BY id DESC LIMIT 1;
+-- Query to update an employer in the "employer" table
+UPDATE employer SET fname='Jane', lname='Doe', tel='9876543210', description='Updated description', date='2023-05-18 10:00:00' WHERE id=1;
+-- Query to delete an employer from the "employer" table
+DELETE FROM employer WHERE id=1;
+
+-- Query to retrieve invoices based on employer ID
+SELECT * FROM invoice WHERE job_id IN (SELECT id FROM job WHERE employer_id = <employer_id>);
+
+-- Query to retrieve all invoices
+SELECT * FROM invoice;
+
+-- Query to retrieve invoices based on a specific column and ID
+SELECT * FROM invoice WHERE <column_name> = <id>;
+
+-- Query to insert a new invoice
+INSERT INTO invoice (job_id, amount) VALUES (<job_id>, <amount>);
+
+-- Query to retrieve the latest invoice
+SELECT * FROM invoice ORDER BY id DESC LIMIT 1;
+
+-- Query to update an existing invoice
+UPDATE invoice SET job_id = <job_id>, amount = <amount> WHERE id = <invoice_id>;
+
+-- Query to delete an invoice
+DELETE FROM invoice WHERE id = <invoice_id>;
+
 
 
 
